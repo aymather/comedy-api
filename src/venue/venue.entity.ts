@@ -3,6 +3,7 @@ import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
 import { Event } from 'src/event/event.entity';
 import { Host } from 'src/host/host.entity';
 import { Room } from 'src/room/room.entity';
+import { VenueImage } from 'src/venue-image/venue-image.entity';
 import {
 	Column,
 	Entity,
@@ -44,6 +45,6 @@ export class Venue extends TableEntity {
 	@Column({ nullable: true })
 	place_id: string | null;
 
-	@Column({ nullable: true })
-	description: string | null;
+	@OneToMany(() => VenueImage, (image) => image.venue)
+	images: VenueImage[];
 }

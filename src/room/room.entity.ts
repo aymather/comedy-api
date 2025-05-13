@@ -33,7 +33,4 @@ export class Room extends TableEntity {
 
 	@Column({ nullable: true })
 	profile_image_url: string | null;
-
-	@Column({ nullable: true })
-	description: string | null;
 }

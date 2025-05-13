@@ -40,7 +40,7 @@ export class VenueService {
 			where: {
 				host: { host_uid: findAllVenueParamsDto.host_uid }
 			},
-			relations: ['rooms']
+			relations: ['rooms', 'images', 'host']
 		});
 		return venues.map((venue) => venue.cast(PublicVenue));
 	}
@@ -50,7 +50,7 @@ export class VenueService {
 	): Promise<FindOneVenueResponseDto> {
 		const venue = await this.venuesRepository.findOneOrFail({
 			where: { venue_uid: findOneVenueParamsDto.venue_uid },
-			relations: ['rooms']
+			relations: ['rooms', 'images', 'host']
 		});
 		return venue.cast(PublicVenue);
 	}

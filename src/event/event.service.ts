@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as dayjs from 'dayjs';
 import { Artist } from 'src/artist/artist.entity';
 import { EventArtistLink } from 'src/event-artist-link/event-artist-link.entity';
 import { Room } from 'src/room/room.entity';
@@ -46,12 +47,12 @@ export class EventService {
 	): Promise<FindAllEventsResponseDto> {
 		const where: any = {
 			room: {
-				room_uid: findAllEventsQueryDto.room_uid,
-				venue: {
-					venue_uid: findAllEventsQueryDto.venue_uid,
-					host: {
-						host_uid: findAllEventsQueryDto.host_uid
-					}
+				room_uid: findAllEventsQueryDto.room_uid
+			},
+			venue: {
+				venue_uid: findAllEventsQueryDto.venue_uid,
+				host: {
+					host_uid: findAllEventsQueryDto.host_uid
 				}
 			}
 		};
@@ -59,11 +60,9 @@ export class EventService {
 		// Add date filtering if date is provided
 		if (findAllEventsQueryDto.date) {
 			// Create date in local timezone
-			const [year, month, day] = findAllEventsQueryDto.date
-				.split('-')
-				.map(Number);
-			const startOfDay = new Date(year, month - 1, day, 0, 0, 0, 0);
-			const endOfDay = new Date(year, month - 1, day, 23, 59, 59, 999);
+			const searchDate = dayjs(findAllEventsQueryDto.date);
+			const startOfDay = searchDate.startOf('day').toDate();
+			const endOfDay = searchDate.endOf('day').toDate();
 
 			where.start_time = Between(startOfDay, endOfDay);
 		}

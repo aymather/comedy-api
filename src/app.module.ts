@@ -10,6 +10,7 @@ import { HostModule } from './host/host.module';
 import { RevisionModule } from './revision/revision.module';
 import { RoomModule } from './room/room.module';
 import { SearchModule } from './search/search.module';
+import { VenueImageModule } from './venue-image/venue-image.module';
 import { VenueModule } from './venue/venue.module';
 
 @Module({
@@ -23,7 +24,8 @@ import { VenueModule } from './venue/venue.module';
 		EventArtistLinkModule,
 		ArtistModule,
 		RevisionModule,
-		SearchModule
+		SearchModule,
+		VenueImageModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

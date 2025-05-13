@@ -25,7 +25,7 @@ export class HostService {
 
 	async findAll(): Promise<FindAllHostResponseDto> {
 		const hosts = await this.hostsRepository.find({
-			relations: ['venues', 'venues.rooms']
+			relations: ['venues', 'venues.rooms', 'venues.images']
 		});
 		return hosts.map((host) => host.cast(PublicHost));
 	}
@@ -35,7 +35,7 @@ export class HostService {
 	): Promise<FindOneHostResponseDto> {
 		const host = await this.hostsRepository.findOneOrFail({
 			where: { host_uid: findOneHostParamsDto.host_uid },
-			relations: ['venues', 'venues.rooms']
+			relations: ['venues', 'venues.rooms', 'venues.images']
 		});
 		return host.cast(PublicHost);
 	}
