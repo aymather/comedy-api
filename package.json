@@ -19,7 +19,8 @@
 		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
 		"test:e2e": "jest --config ./test/jest-e2e.json",
 		"automation": "npx ts-node ./automations/run.ts",
-		"ms:refresh-artists": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/meilisearch/refresh-artists.ts"
+		"ms:refresh-artists": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/meilisearch/refresh-artists.ts",
+		"tools:test": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/test.ts"
 	},
 	"dependencies": {
 		"@aws-sdk/client-secrets-manager": "^3.787.0",

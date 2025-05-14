@@ -4,6 +4,7 @@ import {
 	Delete,
 	Get,
 	Param,
+	Patch,
 	Post,
 	Put
 } from '@nestjs/common';
@@ -21,6 +22,11 @@ import {
 	FindOneVenueParamsDto,
 	FindOneVenueResponseDto
 } from './dto/find-one.dto';
+import {
+	PatchVenueLocationBodyDto,
+	PatchVenueLocationParamsDto,
+	PatchVenueLocationResponseDto
+} from './dto/patch-location.dto';
 import {
 	UpdateVenueBodyDto,
 	UpdateVenueParamsDto,
@@ -67,5 +73,16 @@ export class VenueController {
 		@Body() updateVenueBodyDto: UpdateVenueBodyDto
 	): Promise<UpdateVenueResponseDto> {
 		return this.venueService.update(updateVenueParamsDto, updateVenueBodyDto);
+	}
+
+	@Patch('host/:host_uid/venue/:venue_uid/location')
+	async patchVenueLocation(
+		@Param() patchVenueLocationParamsDto: PatchVenueLocationParamsDto,
+		@Body() patchVenueLocationBodyDto: PatchVenueLocationBodyDto
+	): Promise<PatchVenueLocationResponseDto> {
+		return this.venueService.patchVenueLocation(
+			patchVenueLocationParamsDto,
+			patchVenueLocationBodyDto
+		);
 	}
 }

@@ -7,32 +7,35 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { AxiosInstance } from 'axios';
 import { ConfigManagerService } from 'src/config-manager/config-manager.service';
 import { GoogleMapsConfig } from 'src/etc/types/config-manager';
-import { HttpBaseDelegate } from './base.delegate';
 import {
 	AutocompleteSceneBodyDto,
 	GoogleMapsAutocompleteSceneResponseDto
-} from './dto/autocomplete-scene.dto';
-import { DriveTimeQueryDto, DriveTimeResponseDto } from './dto/drive-time.dto';
+} from '../location/dto/autocomplete-scene.dto';
+import {
+	DriveTimeQueryDto,
+	DriveTimeResponseDto
+} from '../location/dto/drive-time.dto';
 import {
 	GeocodeLatLngQueryDto,
 	GeocodeLatLngResponseDto
-} from './dto/geocode-lat-lng.dto';
+} from '../location/dto/geocode-lat-lng.dto';
 import {
 	GeocodePlaceIdQueryDto,
 	GeocodePlaceIdResponseDto
-} from './dto/geocode-place-id.dto';
+} from '../location/dto/geocode-place-id.dto';
 import {
 	GoogleMapsAutocompletePlaceBodyDto,
 	GoogleMapsAutocompletePlaceResponseDto
-} from './dto/google-maps-autocomplete-place.dto';
+} from '../location/dto/google-maps-autocomplete-place.dto';
 import {
 	GetLocationDetailsByPlaceIdBodyDto,
 	LocationDetailsByPlaceIdResponseDto
-} from './dto/location-details-by-place-id.dto';
+} from '../location/dto/location-details-by-place-id.dto';
 import {
 	GetPlacePolygonBodyDto,
 	PlacePolygonResponseDto
-} from './dto/polygon.dto';
+} from '../location/dto/polygon.dto';
+import { HttpBaseDelegate } from './base.delegate';
 
 @Injectable()
 export class GoogleMapsServiceDelegate extends HttpBaseDelegate {
@@ -125,7 +128,7 @@ export class GoogleMapsServiceDelegate extends HttpBaseDelegate {
 			const result = response.data.result;
 
 			return {
-				google_place_id: result.place_id,
+				place_id: result.place_id,
 				name: result.name,
 				formatted_address: result.formatted_address,
 				latitude: result.geometry.location.lat,

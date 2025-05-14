@@ -1,6 +1,7 @@
 import { Expose, Type } from 'class-transformer';
 import { NanoId } from 'src/etc/nanoid';
 import { PublicHost } from 'src/host/dto/entity.dto';
+import { PublicLocation } from 'src/location/dto/location.entity';
 import { PublicRoom } from 'src/room/dto/entity.dto';
 import { PublicVenueImage } from 'src/venue-image/dto/entity.dto';
 
@@ -34,4 +35,8 @@ export class PublicVenue {
 	@Expose()
 	@Type(() => PublicVenueImage)
 	images: PublicVenueImage[];
+
+	@Expose()
+	@Type(() => PublicLocation)
+	location: PublicLocation | null;
 }

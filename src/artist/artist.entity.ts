@@ -1,12 +1,13 @@
 import { TableEntity } from 'src/etc/mixins/TableEntity';
 import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
+import { SerialRelationId } from 'src/etc/types';
 import { EventArtistLink } from 'src/event-artist-link/event-artist-link.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('artist')
 export class Artist extends TableEntity {
 	@PrimaryGeneratedColumn()
-	artist_id: number;
+	artist_id: SerialRelationId;
 
 	@Column(NanoIdColumnOptions)
 	artist_uid: NanoId = generate_nanoid();

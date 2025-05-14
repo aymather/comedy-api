@@ -5,8 +5,8 @@ import { ArtistModule } from './artist/artist.module';
 import { DatabaseModule } from './database/database.module';
 import { EventArtistLinkModule } from './event-artist-link/event-artist-link.module';
 import { EventModule } from './event/event.module';
-import { GoogleMapsModule } from './google-maps/google-maps.module';
 import { HostModule } from './host/host.module';
+import { LocationModule } from './location/location.module';
 import { RevisionModule } from './revision/revision.module';
 import { RoomModule } from './room/room.module';
 import { SearchModule } from './search/search.module';
@@ -17,7 +17,6 @@ import { VenueModule } from './venue/venue.module';
 	imports: [
 		DatabaseModule,
 		HostModule,
-		GoogleMapsModule,
 		VenueModule,
 		RoomModule,
 		EventModule,
@@ -25,7 +24,8 @@ import { VenueModule } from './venue/venue.module';
 		ArtistModule,
 		RevisionModule,
 		SearchModule,
-		VenueImageModule
+		VenueImageModule,
+		LocationModule
 	],
 	controllers: [AppController],
 	providers: [AppService]

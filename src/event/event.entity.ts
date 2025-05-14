@@ -1,5 +1,6 @@
 import { TableEntity } from 'src/etc/mixins/TableEntity';
 import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
+import { SerialRelationId } from 'src/etc/types';
 import { EventArtistLink } from 'src/event-artist-link/event-artist-link.entity';
 import { Room } from 'src/room/room.entity';
 import { Venue } from 'src/venue/venue.entity';
@@ -15,7 +16,7 @@ import {
 @Entity('event')
 export class Event extends TableEntity {
 	@PrimaryGeneratedColumn()
-	event_id: number;
+	event_id: SerialRelationId;
 
 	@Column(NanoIdColumnOptions)
 	event_uid: NanoId = generate_nanoid();
@@ -24,14 +25,14 @@ export class Event extends TableEntity {
 	external_id: string;
 
 	@Column()
-	venue_id: number;
+	venue_id: SerialRelationId;
 
 	@ManyToOne(() => Venue, (venue) => venue.events)
 	@JoinColumn({ name: 'venue_id' })
 	venue: Venue;
 
 	@Column({ nullable: true })
-	room_id: number | null;
+	room_id: SerialRelationId | null;
 
 	@ManyToOne(() => Room, (room) => room.events, { nullable: true })
 	@JoinColumn({ name: 'room_id' })

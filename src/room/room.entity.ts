@@ -1,5 +1,6 @@
 import { TableEntity } from 'src/etc/mixins/TableEntity';
 import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
+import { SerialRelationId } from 'src/etc/types';
 import { Event } from 'src/event/event.entity';
 import { Venue } from 'src/venue/venue.entity';
 import {
@@ -14,7 +15,7 @@ import {
 @Entity('room')
 export class Room extends TableEntity {
 	@PrimaryGeneratedColumn()
-	room_id: number;
+	room_id: SerialRelationId;
 
 	@Column(NanoIdColumnOptions)
 	room_uid: NanoId = generate_nanoid();

@@ -80,7 +80,14 @@ export class EventService {
 	): Promise<FindOneEventResponseDto> {
 		const event = await this.eventsRepository.findOneOrFail({
 			where: { event_uid: findOneEventParamsDto.event_uid },
-			relations: ['room', 'artists', 'artists.artist', 'venue', 'venue.host']
+			relations: [
+				'room',
+				'artists',
+				'artists.artist',
+				'venue',
+				'venue.host',
+				'venue.location'
+			]
 		});
 
 		return event.cast(PublicEvent);

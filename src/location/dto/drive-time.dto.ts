@@ -1,6 +1,16 @@
 import { Expose, Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 
+class LatLng {
+	@Expose()
+	@IsNotEmpty()
+	latitude: number;
+
+	@Expose()
+	@IsNotEmpty()
+	longitude: number;
+}
+
 export class DriveTimeQueryDto {
 	@Expose()
 	@Type(() => Number)

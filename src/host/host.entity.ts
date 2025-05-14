@@ -1,5 +1,6 @@
 import { TableEntity } from 'src/etc/mixins/TableEntity';
 import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
+import { SerialRelationId } from 'src/etc/types';
 import { Venue } from 'src/venue/venue.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { HostType } from './dto/types';
@@ -7,7 +8,7 @@ import { HostType } from './dto/types';
 @Entity('host')
 export class Host extends TableEntity {
 	@PrimaryGeneratedColumn()
-	host_id: number;
+	host_id: SerialRelationId;
 
 	@Column(NanoIdColumnOptions)
 	host_uid: NanoId = generate_nanoid();

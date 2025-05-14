@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Host } from 'src/host/host.entity';
+import { LocationService } from 'src/location/location.service';
 import { Repository } from 'typeorm';
 import {
 	CreateVenueBodyDto,
@@ -18,6 +19,11 @@ import {
 	FindOneVenueResponseDto
 } from './dto/find-one.dto';
 import {
+	PatchVenueLocationBodyDto,
+	PatchVenueLocationParamsDto,
+	PatchVenueLocationResponseDto
+} from './dto/patch-location.dto';
+import {
 	UpdateVenueBodyDto,
 	UpdateVenueParamsDto,
 	UpdateVenueResponseDto
@@ -30,7 +36,8 @@ export class VenueService {
 		@InjectRepository(Venue)
 		private readonly venuesRepository: Repository<Venue>,
 		@InjectRepository(Host)
-		private readonly hostsRepository: Repository<Host>
+		private readonly hostsRepository: Repository<Host>,
+		private readonly locationService: LocationService
 	) {}
 
 	async findAll(
@@ -91,6 +98,29 @@ export class VenueService {
 		});
 
 		venue.update(updateVenueBodyDto);
+
+		await this.venuesRepository.save(venue);
+		return venue.cast(PublicVenue);
+	}
+
+	async patchVenueLocation(
+		patchVenueLocationParamsDto: PatchVenueLocationParamsDto,
+		patchVenueLocationBodyDto: PatchVenueLocationBodyDto
+	): Promise<PatchVenueLocationResponseDto> {
+		const venue = await this.venuesRepository.findOneOrFail({
+			where: {
+				venue_uid: patchVenueLocationParamsDto.venue_uid,
+				host: { host_uid: patchVenueLocationParamsDto.host_uid }
+			}
+		});
+
+		if (patchVenueLocationBodyDto.place_id === null) {
+			venue.location = null;
+		} else {
+			venue.location = await this.locationService.create(
+				patchVenueLocationBodyDto.place_id
+			);
+		}
 
 		await this.venuesRepository.save(venue);
 		return venue.cast(PublicVenue);

@@ -1,7 +1,9 @@
 import { TableEntity } from 'src/etc/mixins/TableEntity';
 import { generate_nanoid, NanoId, NanoIdColumnOptions } from 'src/etc/nanoid';
+import { SerialRelationId } from 'src/etc/types';
 import { Event } from 'src/event/event.entity';
 import { Host } from 'src/host/host.entity';
+import { Location } from 'src/location/location.entity';
 import { Room } from 'src/room/room.entity';
 import { VenueImage } from 'src/venue-image/venue-image.entity';
 import {
@@ -16,7 +18,7 @@ import {
 @Entity('venue')
 export class Venue extends TableEntity {
 	@PrimaryGeneratedColumn()
-	venue_id: number;
+	venue_id: SerialRelationId;
 
 	@Column(NanoIdColumnOptions)
 	venue_uid: NanoId = generate_nanoid();
@@ -47,4 +49,12 @@ export class Venue extends TableEntity {
 
 	@OneToMany(() => VenueImage, (image) => image.venue)
 	images: VenueImage[];
+
+	@ManyToOne(() => Location, {
+		nullable: true,
+		eager: true,
+		onDelete: 'CASCADE'
+	})
+	@JoinColumn({ name: 'location_id' })
+	location: Location | null;
 }

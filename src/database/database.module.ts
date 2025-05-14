@@ -14,7 +14,10 @@ import { ConfigManagerService } from 'src/config-manager/config-manager.service'
 				logging: false,
 				type: 'postgres',
 				entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-				synchronize: true
+				synchronize: true,
+				extra: {
+					options: `-c search_path=${configManager.initDatabaseConfig().schema},public`
+				}
 
 				/**
 				 * For debugging SQL Queries

@@ -12,6 +12,7 @@ export const createDb = async (): Promise<DataSource> => {
 		DATABASE_NAME,
 		DATABASE_SCHEMA
 	} = process.env;
+	console.log('DATABASE_SCHEMA', DATABASE_SCHEMA);
 
 	// Database Config
 	spinner.start('Connecting to database');
@@ -29,7 +30,7 @@ export const createDb = async (): Promise<DataSource> => {
 			// This is a hacky way to set the search path to the schema we want
 			// This is actually necessary to enable the `postgis` extension because
 			// i guess by default it's not enabled in the schema... (don't ask me why)
-			options: `-c search_path=${DATABASE_SCHEMA}`
+			options: `-c search_path=${DATABASE_SCHEMA},public`
 		}
 	});
 	await ds.initialize();

@@ -1,7 +1,9 @@
-import { AddressComponent } from '@googlemaps/google-maps-services-js';
+import {
+	AddressComponent,
+	LatLngBounds
+} from '@googlemaps/google-maps-services-js';
 import { Expose } from 'class-transformer';
 import { IsString } from 'src/etc/decorators/IsString';
-import { Viewport } from '../types';
 
 export class GetLocationDetailsByPlaceIdBodyDto {
 	@Expose()
@@ -11,7 +13,7 @@ export class GetLocationDetailsByPlaceIdBodyDto {
 
 export class LocationDetails {
 	@Expose()
-	google_place_id: string;
+	place_id: string;
 
 	@Expose()
 	name: string;
@@ -26,7 +28,7 @@ export class LocationDetails {
 	longitude: number;
 
 	@Expose()
-	viewport: Viewport;
+	viewport: LatLngBounds;
 
 	@Expose()
 	address_components: AddressComponent[];

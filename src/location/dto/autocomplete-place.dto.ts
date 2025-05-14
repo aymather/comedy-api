@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsString } from 'class-validator';
+import { IsString } from 'src/etc/decorators/IsString';
 import { GoogleMapsAutocompleteResult } from './autocomplete.dto';
 
 export class AutocompletePlaceBodyDto {
