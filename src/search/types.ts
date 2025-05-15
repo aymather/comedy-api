@@ -1,3 +1,4 @@
 export enum SearchType {
-	artist = 'artist'
+	artist = 'artist',
+	venue = 'venue'
 }

@@ -20,6 +20,7 @@
 		"test:e2e": "jest --config ./test/jest-e2e.json",
 		"automation": "npx ts-node ./automations/run.ts",
 		"ms:refresh-artists": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/meilisearch/refresh-artists.ts",
+		"ms:refresh-venues": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/meilisearch/refresh-venues.ts",
 		"tools:test": "npx ts-node -r tsconfig-paths/register -P ./tsconfig.json tools/test.ts"
 	},
 	"dependencies": {

@@ -40,7 +40,8 @@ export class ConfigManagerService extends ConfigService {
 		return {
 			host: this.getEnv('MEILISEARCH_URL'),
 			apiKey: this.getEnv('MEILISEARCH_MASTER_KEY'),
-			artistsIndex: this.getEnv('MEILISEARCH_ARTISTS_INDEX')
+			artistsIndex: this.getEnv('MEILISEARCH_ARTISTS_INDEX'),
+			venuesIndex: this.getEnv('MEILISEARCH_VENUES_INDEX')
 		};
 	}
 

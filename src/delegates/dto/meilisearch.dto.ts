@@ -10,10 +10,25 @@ export class MeilisearchArtistDocument {
 	search_type: SearchType;
 }
 
+export class MeilisearchVenueDocument {
+	venue_uid: NanoId;
+	profile_image_url: string;
+	name: string;
+	search_type: SearchType;
+}
+
 export class MeilisearchSearchArtistsQueryDto {
+	@IsString({ allowUndefined: true, nullable: true })
+	q: string;
+}
+
+export class MeilisearchSearchVenuesQueryDto {
 	@IsString({ allowUndefined: true, nullable: true })
 	q: string;
 }
 
 export type MeilisearchSearchArtistsResponseDto =
 	SearchResponse<MeilisearchArtistDocument>;
+
+export type MeilisearchSearchVenuesResponseDto =
+	SearchResponse<MeilisearchVenueDocument>;

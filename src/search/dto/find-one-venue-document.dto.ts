@@ -1,8 +1,8 @@
 import { Expose } from 'class-transformer';
 import { IsNanoid, NanoId } from 'src/etc/nanoid';
 
-export class FindOneArtistDocumentDto {
+export class FindOneVenueDocumentDto {
 	@Expose()
 	@IsNanoid()
-	readonly artist_uid: NanoId;
+	readonly venue_uid: NanoId;
 }

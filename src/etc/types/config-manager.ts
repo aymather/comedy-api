@@ -10,6 +10,7 @@ export interface MeilisearchConfig {
 	host: string;
 	apiKey: string;
 	artistsIndex: string;
+	venuesIndex: string;
 }
 
 export interface GeneralConfig {

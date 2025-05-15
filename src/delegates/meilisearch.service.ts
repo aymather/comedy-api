@@ -7,7 +7,10 @@ import { MeilisearchConfig } from 'src/etc/types/config-manager';
 import {
 	MeilisearchArtistDocument,
 	MeilisearchSearchArtistsQueryDto,
-	MeilisearchSearchArtistsResponseDto
+	MeilisearchSearchArtistsResponseDto,
+	MeilisearchSearchVenuesQueryDto,
+	MeilisearchSearchVenuesResponseDto,
+	MeilisearchVenueDocument
 } from './dto/meilisearch.dto';
 
 @Injectable()
@@ -34,14 +37,36 @@ export class MeilisearchServiceDelegate {
 			});
 	};
 
+	searchVenues = async (
+		meilisearchSearchVenuesQueryDto: MeilisearchSearchVenuesQueryDto
+	): Promise<MeilisearchSearchVenuesResponseDto> => {
+		return this.client
+			.index(this.meilisearchConfig.venuesIndex)
+			.search(meilisearchSearchVenuesQueryDto.q, {
+				showRankingScore: true,
+				hitsPerPage: 10,
+				page: 1
+			});
+	};
+
 	upsertArtists = (artists: MeilisearchArtistDocument[]) => {
 		this.uploadInChunks(artists, this.meilisearchConfig.artistsIndex);
+	};
+
+	upsertVenues = (venues: MeilisearchVenueDocument[]) => {
+		this.uploadInChunks(venues, this.meilisearchConfig.venuesIndex);
 	};
 
 	removeArtist = (artistUid: NanoId) => {
 		this.client
 			.index(this.meilisearchConfig.artistsIndex)
 			.deleteDocument(artistUid);
+	};
+
+	removeVenue = (venueUid: NanoId) => {
+		this.client
+			.index(this.meilisearchConfig.venuesIndex)
+			.deleteDocument(venueUid);
 	};
 
 	private uploadInChunks = async (data: Array<any>, index: string) => {
