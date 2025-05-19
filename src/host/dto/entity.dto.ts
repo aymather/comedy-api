@@ -11,6 +11,9 @@ export class PublicHost {
 	name: string;
 
 	@Expose()
+	description: string | null;
+
+	@Expose()
 	profile_image_url: string | null;
 
 	@Expose()
