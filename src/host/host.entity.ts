@@ -22,7 +22,11 @@ export class Host extends TableEntity {
 	@Column({ nullable: true })
 	stage_image_url: string | null;
 
-	@Column({ type: 'enum', enum: HostType })
+	@Column({
+		type: 'enum',
+		enum: HostType,
+		default: HostType.VENUE
+	})
 	type: HostType;
 
 	@OneToMany(() => Venue, (venue) => venue.host)

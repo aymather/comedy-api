@@ -69,7 +69,7 @@ export class EventService {
 
 		const events = await this.eventsRepository.find({
 			where,
-			relations: ['room', 'venue', 'venue.host']
+			relations: ['room', 'venue', 'venue.host', 'venue.images']
 		});
 
 		return events.map((event) => event.cast(PublicEvent));
@@ -86,7 +86,8 @@ export class EventService {
 				'artists.artist',
 				'venue',
 				'venue.host',
-				'venue.location'
+				'venue.location',
+				'venue.images'
 			]
 		});
 
